@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <div class="wrapper">
+    <header class="header" role="banner" aria-label="The Top">
+      
+      <%- include("./partials/nav.ejs") %>
+    
+      <section class="section__img">
+        <img src="/svg/icon/team.svg" alt="Team svg image" srcset="/svg/icon/team.svg">
+      </section>
+      
+      <main class="[ flow ] [ main ]">
+        <h1 class="main__heading">Hire Your Personal Essay Writer Today</h1>
+        <h2 class="main__sub">Essay Writing Service For Everyone Who Wants To See Results Twice As Fast.</h2>
+        <a class="main__button" href="/order-page"><span>Write My Paper</span></a>
+      </main>
+      
+      <!--Waves Container-->
+      <%- include("./partials/waves.ejs") %>
+    <!--Waves end-->
+    </header>
+    <section id="insta_nav">
+      <div class="insta_nav">
+        <nav class="content__sidebar-inner">
+          <h2>Summary</h2>
+          <ul id="table-of-contents"></ul>
+        </nav>
+      </div>
+    </section>
+    
+    <article>
+    
+    <section class="section">
+      <div class="container">
+        <h2>Meet our team of experienced writers and writing advisors.</h2>
+        <p>Learn helpful tips to improve your writing with the Online Guide to Writing.
+        We're here to support you with student services like advising by chat, phone, and email, lifetime career services, and more. Here, we assistant students in canvassing the challenges of academia and the vast dynamics that is associated with it. We have plenty of resources to help students improve on their writing skills. <a class="inline_link" href="/order">Get started</a>!</p>
+        <h2>Team of Professional Essay Writers</h2>
+        <p>With our essay service, you'll find an essay writer for any task. Their rating is based on previous customer reviews and successful orders. Before you hire a writer, you can familiarize yourself with their track record in detail.</p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <h2>TheTOP's Best writers</h2>
+        <p>Check out our writers' awards and ratings, and choose the most suitable writer for your order</p>
+        <div class="row-2" id="writers">
+          <script>
+            document.addEventListener( "DOMContentLoaded", loadJSON, false );
+
+            async function loadJSON() {    
+              let xhr = await new XMLHttpRequest();
+              let url = '/json/data.json'
+              
+                try{
+                  // Opera 8.0+, Firefox, Chrome, Safari
+                  http_request = new XMLHttpRequest();
+                          }catch (e) {
+                    // Internet Explorer Browsers
+                  try{
+                    http_request = new ActiveXObject("Msxml2.XMLHTTP");
+              					
+                      }catch (e) {
+              				
+                     try{
+                       http_request = new ActiveXObje("Microsoft.XMLHTTP");
+                         }catch (e) {
+                         alert("Your browser broke!");
+                         return false;
+                      }
+              					
+                   }
+                }
+              
+              xhr.open('GET', url);
+              
+              xhr.send();
+              
+              xhr.onload = () => {
+                if (xhr.readyState !== 4 && xhr.status !== 200) {
+                  console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                } else {
+                  console.log(`Done, got ${xhr.response.length} bytes`);
+                  var data = JSON.parse(xhr.responseText);
+                  let myData = data.writersData
+                  console.log(myData);
+                  append_json(myData);
+                  
+                  }
+              
+              };
+              
+              xhr.onprogress = (event) => {
+                if (event.lengthComputable) {
+                  console.log(`Received ${event.loaded} of ${event.total} bytes`);
+                } else {
+                  console.log(`Received ${event.loaded} bytes`); // no Content-Length
+                }
+              
+              };
+            
+              xhr.onerror = () => {
+              console.log("Request failed");
+              };
+            }
+            
+            
+            function append_json(data) {
+              document.querySelector('#writers').innerHTML = `${data.map(writer =>
+                `<div class="profile">
+                  <div class="profile-bg"></div>
+                    <div class="profile__container">
+                      <div class="profile-image">
+                        <img srcset="${writer.photo}" src="${writer.photo}" alt="profile picture">
+                      </div>
+                      <div class="profile-info">
+                        <h3 class="first-name"><span>${writer.firstName}</span></h3>
+                        <h3 class="second-name">${writer.lastName}</h3>
+                        <h4>ABOUT</h4>
+                        <p>${writer.profile}</p>
+                      
+                        <div class="social-media-icons">
+                              
+                        </div>
+                      </div>
+                    </div>
+                    <div class="statistics">
+                      <p><strong>${writer.orders}</strong> ORDERS</p>
+                      <p><strong>${writer.reviews}</strong> REVIEWS</p>
+                      <a class="profile__button" href="/order-page">Hire me</a>
+                      
+                    </div>
+                </div>
+              `
+              ).join('')}`
+               
+              /* for (var prop in data) {
+                if (data.hasOwnProperty(prop)) {
+                  console.log(data[prop]);
+                  console.log(data[prop].name);
+                }
+              } */
+            }
+          </script>
+        </div>
+      </div>
+    </section> 
+    
+    <section>
+      <div class="container">
+        <h2>Reasons Why students order last minute assistance with assignments from us</h2>
+        <ul class="team__merits">
+          <li>
+            <img class="svg" src="/svg/icon/smartphone-mobile-phone-svgrepo-com.svg" alt="" />
+            <div>
+              <h3>Mobile Phone Friendly</h3>
+              <p>You do not need to be on laptop all the time, our mobile interface is great to use.</p>
+            </div>
+          </li>
+          <li>
+            <img class="svg" src="/svg/icon/savings-money-svgrepo-com.svg" alt="" />
+            <div>
+              <h3>Pay Using different channels</h3>
+              <p>You can pay using multiple secure channels, such as PayPal or Credit Cards.</p>
+          </li>
+          <li>
+            <img class="svg" src="/svg/icon/statistics-graph-svgrepo-com.svg" alt="" />
+            <div>
+              <h3>Plagiarism Free Work Guaranteed</h3>
+              <p>We sent unique content with no plagiarism.</p>
+          </li>
+          <li>
+            <img class="svg" src="/svg/icon/survey-svgrepo-com.svg" alt="" />
+            <div>
+              <h3>Order Preview Before Final Work</h3>
+              <p>You get a preview before making final payment.</p>
+          </li>
+          <li>
+            <img class="svg" src="/svg/icon/chat-svgrepo-com.svg" alt="" />
+            <div>
+              <h3>Ping Us On Live Chat</h3>
+              <p>You can talk to us anytime around the clock. We are up for the support.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <h2>Our Essay Writing Service Features</h2>
+        <p>Check out our custom essay writing service features. We guarantee that your essay will not only be delivered on time but will also be of the highest quality.</p>
+        <div class="row">
+          <div class="place__middle">
+            <div>
+              <i><img class="svg" src="/svg/icon/file-document-svgrepo-com (1).svg" alt="" /></i>
+              <h3>Free Originality Report</h3>
+              <p>A full report on originality can be attached to your essay writing order to ensure your paper's originality.</p>
+            </div>
+            <div>
+              <i><img class="svg" src="/svg/icon/clock-watch-svgrepo-com (1).svg" alt="" /></i>
+              <h3>24/7 Support</h3>
+              <p>You can contact us any time and ask to write essay for me; we'll always be happy to help you out.</p>
+            </div>
+            <div>
+              <i><img class="svg" src="/svg/icon/user-anonimity-svgrepo-com.svg" alt="" /></i>
+              <h3>Anonymity</h3>
+              <p>We care about the privacy of our clients and when you pay for essay, we will never share your personal information with any third parties or even paper writers.</p>
+            </div>
+            <div>
+              <i><img class="svg" src="/svg/icon/curriculum-svgrepo-com.svg" alt="" /></i>
+              <h3>Unlimited Edits</h3>
+              <p>When you pay for essay writing, you have 30 days after the order was completed to ask our essay writers for free revisions, in case you need any.</p>
+            </div>
+          </div>
+          <div class="discount">
+            <h3>What’s included</h3>
+            <ul class="discount__items">
+              <li><span>Formatting </span> <span>$6.99</span> <span>FREE</span></li> 
+              <li><span>Unlimited Edits </span> <span>$21.99</span> <span>FREE</span></li>
+              <li><span>Title Page </span> <span>$4.99</span> <span>FREE</span></li>
+              <li><span>Originality Check </span> <span>$15.99</span> <span>FREE</span></li>
+              <li><span>Outline </span> <span>$3.99</span> <span>FREE</span></li>
+              <li><span>Formatting </span> <span>$6.99</span> <span>FREE</span></li>
+            </ul>
+            <h4>Get all these features for <span>$72.99</span><span>FREE</span></h4>
+            <!--button class="gen__buttons" type="submit"-->
+            <a class="large_button small" href="/order-page">Place An Order</a></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <h2>How our online assignment writing service ensure best grades for you?</h2>
+        <p>Grades are a top priority for college students. Good grades help to get a good job, highlight your academic excellence among peers and build great rapport with the professor. We take the following steps to ensure you never miss out the desired grade when you ask us to write my assignment.</p>
+        <ul class="styled__list">
+          <li><strong>Comprehensive Writing Help</strong>: Our experts provide professional writing help online which can enhance your grades and overall academic performance. The reason is experience and volume of assignments done in the last few years. Our writers provide comprehensive research and do not miss out any single requirement. We make sure that there is a considerable amount of editorial reference in your assignment.</li>
+          <li><strong>Fully referenced writing service</strong>: Whatever, essay assignment or paper we deliver, it is fully backed with research. Our professional writing experts know how to include references, bibliography and format as per the desired standard of APA, Harvard or MLA. It makes our assignment writing service the most desirable and affordable.</li>
+          <li><strong>Plagiarism free online writing help</strong>: We provide assignment writing help free from plagiarism. We understand the gravity of plagiarism in academics and never take chances. Hence, our free plagiarism checker keeps uniqueness to 100% and any academic misconduct at bay. Still, if you have any doubts for the authenticity of your assignment, you can request a Turnitin Report. Turnitin algorithm browses through millions of web pages and research paper to make sure that any part of your assignment isn't copied.</li>
+          <!--li><strong></strong> </li>
+          <li><strong></strong> </li-->
+        </ul>
+      </div>
+    </section>
+    
+    </article>
+    
+    <%- include('partials/footer'); -%>
+
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

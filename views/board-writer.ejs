@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <div class="wrapper">
+      <header class="header" role="banner" aria-label="The Top">
+        <%- include("./partials/nav.ejs") %>
+
+        <section class="section__img">
+          <img src="/svg/icon/moderator.svg" alt="svg image" />
+        </section>
+
+        <main class="[ flow ] [ main ]">
+          <h1 class="main__heading">This Is Your Writer Dashboard</h1>
+          <h2 class="main__sub">
+            <strong><%= user.username %></strong> Profile
+          </h2>
+          <a class="main__button" href="/"><span>Back Home</span></a>
+        </main>
+
+        <!--Waves Container-->
+        <%- include("./partials/waves.ejs") %>
+        <!--Waves end-->
+      </header>
+
+      <%- include('partials/footer'); -%>
+    </div>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,337 @@
+/* @import url("https://fonts.googleapis.com/css?family=Montserrat:600");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:800");
+@import url("https://fonts.googleapis.com/css?family=Montserrat"); */
+
+
+
+.row-2 {
+  --auto-grid-min-size: 18rem; /*16*/
+  --gutter: 1rem
+}
+
+.row-2>* {
+  max-width: 480px; /*400*/
+}
+
+.row-2>*+* {
+  margin-top: 1rem;
+}
+
+@supports(display: grid) {
+  .row-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--auto-grid-min-size), 1fr));
+    grid-gap: var(-gutter);
+  }
+
+  .row-2>* {
+    max-width: unset;
+  }
+
+  .row-2>*+* {
+    margin-top: unset;
+  }
+}
+
+.profile {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-height: 750px;
+  max-width: 900px;
+  margin-top: calc(var(--gutter) + 4vw);
+}
+
+.profile-bg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 10px;
+  background: var(--color-shade);
+  box-shadow: 0 30px 50px -20px var(--good-blue);
+  width: calc(100% - 0px);
+  height: calc(100% - 0px);
+  z-index: 0;
+}
+
+.profile__container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  z-index: 1;
+} 
+
+.profile-image {
+  
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 25px 45px -20px var(--good-red)/*rgba(255, 0, 47, 0.55)*/,
+    inset 0 0px 120px var(--good-red)/*rgba(255, 0, 47, 0.75)*/;
+  width: 10rem;
+  height: 10rem;
+  flex: none;
+  background-image: url("https://zephyo.github.io/22Days/code/3/graphics/profile.png");
+  background-size: cover;
+  background-position: center;
+  
+}
+
+.profile-image::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: var(--good-yellow);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+.profile-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.camera {
+  color: #FFFF;
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  font-size: 1.3rem;
+}
+
+.profile-info {
+  margin-top: 0px;
+  padding: 8% 3% 2% 3%;
+  position: relative;
+  top: 2%;
+  left: 0 !important;
+  z-index: 1;
+}
+
+.profile-info h3 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-block: 0.7rem;
+  position: absolute;
+}
+
+h3.first-name {
+  animation: titleEffect 1s cubic-bezier(0,0.2,0.4,1);
+  top: -85px;
+  right: 30px;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+} 
+
+h3.second-name {
+  animation: titleEffect 1s cubic-bezier(0,0,0.3,1);
+  top: -50px;
+  right: 10px;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.profile-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  margin-top: 0;
+  margin-bottom: 5%;
+}
+
+.social-media-icons a,
+.profile-info h4 {
+  color: var(--good-red);
+}
+
+.profile-info p {
+  line-height: 1.5rem;
+  margin-block: 2rem;
+}
+
+.social-media-icons {
+  display: flex;
+}
+
+.social-media-icons a {
+  margin-top: 7%;
+  font-size: 1.2rem;
+  flex: auto;
+  text-align: center;
+}
+
+.camera,
+.social-media-icons a {
+  transition: text-shadow 0.5s ease;
+}
+
+.camera:hover,
+.social-media-icons a:hover {
+  text-shadow: 0px 5px 15px var(--good-red) /*rgba(255, 0, 47, 0.45)*/;
+}
+
+.statistics {
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-left: auto;
+  line-height: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 1;
+}
+
+.statistics p {
+  margin: 3%;
+  flex: auto;
+  color: var(--good-red);
+  font-size: clamp(0.6rem, 3.2vw, 0.8rem);
+}
+
+.statistics p > * {
+  /* font-size: 1.4rem; */
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  color: var(--color-black);
+  font-weight: 200;
+  margin-right: 0.3rem;
+  line-height: 1;
+  height: 50%;
+}
+
+.statistics .profile__button {
+  width: 80px;
+ /* padding: 10px 10px; */
+  font-size: 0.8rem;
+  outline: none;
+  padding: 4px 4px !important;
+  border: 1px solid var(--good-blue);
+  background-color: var(--good-blue);
+  color: var(--color-light);
+  border-radius: 2px;
+  transition: all 0.4s ease-in-out;
+}
+
+.statistics a {
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  padding: 0% !important;
+}
+
+.icon {
+  background: transparent no-repeat center;
+  background-size: contain;
+  background-origin: content-box;
+  width: 60px;
+  height: 60px;
+  padding: 15px;
+  border: none;
+  transition: transform 0.5s ease;
+}
+
+.icon:hover {
+  transform: scale(0.9);
+}
+
+.arrow {
+  flex: 0 1 75px;
+  background-image: url("https://zephyo.github.io/22Days/code/3/graphics/arrow.svg");
+}
+
+.right {
+  transform: rotate(180deg);
+}
+
+.right:hover {
+  transform: scale(0.9) rotate(180deg);
+}
+
+.close {
+  background-image: url("https://zephyo.github.io/22Days/code/3/graphics/close.svg");
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+@media only screen and (max-aspect-ratio: 4/7) and (max-width: 600px) {
+  .profile {
+    margin-block: 3%;
+    height: 420px; /*97%*/
+  }
+  .profile__container {
+    height: 75%; /*86%*/
+    flex-direction: column;
+  }
+  .profile-image {
+    height: 8rem; /*40%*/
+    width: 8rem/*calc(100% - 90px)*/;
+  }
+  .profile-info {
+    margin-top: 2rem;
+  /*  padding: 6% 1% 1% 1%; */
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .profile-bg {
+    width: 100%;
+  }
+  h3.first-name {
+    left: 40%;
+    top: -55%;
+  }
+  h3.second-name {
+    left: 45%;
+    top: -35%;
+  }
+}
+
+@media screen and (min-aspect-ratio: 4/7) {
+  .profile {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes loadProfile {
+ from{
+    transform: translateY(100px);
+    opacity: 0;
+  }
+ to {
+     transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes loadProfileImage {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+ to {
+     transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes titleEffect {
+ from {
+   opacity:0;
+     transform: translateX(-75px);
+  }
+  to {
+     transform: translateX(0px);
+    opacity: 1;
+  }
+}

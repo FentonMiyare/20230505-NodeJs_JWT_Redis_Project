@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <div class="wrapper">
+      <header class="header" role="banner" aria-label="The Top">
+        <%- include("./partials/nav.ejs") %>
+
+        <section class="section__img">
+          <img src="/svg/icon/profile.svg" alt="svg image" />
+        </section>
+
+        <main class="[ flow ] [ main ]">
+          <h1 class="main__heading">Profile Update, <%= user.username %></h1>
+          <h2 class="main__sub">Updating Your Profile Is As Easy As ABC!</h2>
+          <a class="main__button" href="/"><span>Back Home</span></a>
+        </main>
+
+        <!--Waves Container-->
+        <%- include("./partials/waves.ejs") %>
+        <!--Waves end-->
+      </header>
+
+      <section id="insta_nav">
+        <div class="insta_nav">
+          <nav class="content__sidebar-inner">
+            <h2>Summary</h2>
+            <ul id="table-of-contents"></ul>
+          </nav>
+        </div>
+      </section>
+
+      <article>
+        <section class="section">
+          <div class="container">
+            <h2>Edit Form</h2>
+
+            <div id="editForm">
+              <form
+                method="POST"
+                action="/api/v1/auth/signup"
+                id="a_form"
+                accept-charset="utf-8"
+              >
+                <div class="row">
+                  <div>
+                    <label for="password"
+                      >Username <%- include('./partials/_tooltip.ejs', { info:
+                      `The password must contain atleast 6 characters long.` })
+                      %>
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      value=""
+                      placeholder="User Password"
+                    />
+                    <span class="error"></span>
+                  </div>
+                  <div>
+                    <label for="confirmPassword"
+                      >Email <%- include('./partials/_tooltip.ejs', { info:
+                      `Enter the exact password to confirm the password save.`
+                      }) %>
+                    </label>
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      value=""
+                      placeholder="Confirm the Password"
+                      id=""
+                    />
+                    <span class="error"></span>
+                  </div>
+                </div>
+                <%- include('./partials/editUser-FormFields.ejs') %>
+                <div class="btn_grp">
+                  <a href="/api/v1/admin/users">Cancel</a>
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <%- include('partials/footer'); -%>
+    </div>
+    <script src="/js/main.js" type="module"></script>
+  </body>
+</html>

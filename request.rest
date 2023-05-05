@@ -1,0 +1,166 @@
+GET http://localhost:/
+
+###
+
+GET http://localhost:5000/api/v1/test/all
+
+###
+POST http://localhost:5000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+    "username": "Fenton",
+    "email": "fmiyare@gmail.com",
+    "password": "Abc123##",
+    "confirmPassword": "Abc123##",
+    "roles": ["user", "writer", "admin"]
+}
+###
+
+POST http://localhost:5000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+    "username": "WekesaG",
+    "email": "weksg02@gmail.com",
+    "password": "Abc123##",
+    "confirmPassword": "Abc123##",
+    "profileImage": "/users/admin2.png",
+    "whatsAppNumber": "0754679300",
+    "roles": ["user", "writer"]
+}
+###
+POST http://localhost:5000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+    "username": "user01",
+    "email": "user01@gmail.com",
+    "password": "Abc123",
+    "confirmPassword": "Abc123",
+    "roles": ["user", "writer"]
+}
+
+###
+POST http://localhost:5000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+    "username": "user09",
+    "email": "user09@gmail.com",
+    "password": "Abc123##",
+    "confirmPassword": "Abc123##",
+    "roles": ["admin"]
+}
+
+###
+
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "username": "Fenton",
+    "password": "Abc123##"
+}
+
+###
+
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "username": "user01",
+    "password": "Abc123"
+}
+###
+
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "username": "stephen",
+    "password": "Abc123##"
+}
+###
+POST http://localhost:5000/api/v1/orders
+Content-Type: multipart/form-data; boundary=<calculated when request is sent>
+#application/json
+
+{
+    "category": "Article Review",
+    "deadline": "April 8, 11:09 AM, Tuesday",
+    "format": "Havard",
+    "level": "High School",
+    "pages": "4",
+    "paperDetails": "Downloadable font: download failed (font-family: Source Sans  style: normal weight: 700 stretch: 100 src index: 2) : bad URI or cross-site access not allowed source.",
+    "spacing": "Single",
+    "title": "Rise And Rise Of Wakanda",
+    "work": "Editing",
+    "fileUpload": "file.pdf"
+}
+###
+GET http://localhost:5000/api/v1/auth/signout
+
+###
+GET http://localhost:5000/api/v1/user/me
+
+###
+GET http://localhost:5000/api/v1/user
+
+###
+GET http://localhost:5000/api/v1/writer
+
+###
+GET http://localhost:/api/v1/admin
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDczZmU3ZjZhYzBjZDFlNmEyMGFiMSIsImlhdCI6MTY3ODg5OTAwOCwiZXhwIjoxNjc4ODk5MDY4fQ.avIuer0gTw6_Z1eLbsACSyNUSX3qZL7LOztq4g4jT4c
+
+###
+POST http://localhost:/api/v1/auth/refreshtoken
+Content-Type: application/json
+
+{
+  "refreshToken": "019a44ba-4707-4f8b-8ee5-2bae759c0389"
+}
+
+###
+
+GET http://localhost:5000/api/v1/admin/users?roles=writer
+###
+
+GET http://localhost:5000/api/v1/admin/users?page=1&limit=10&filterBy=roles&roles=writer&sort=createdAt,desc
+
+###
+GET http://localhost:5000/api/v1/admin/users?page=1&sortBy=roles&roles=writer
+
+###
+
+DELETE http://localhost:5000/api/v1/auth/6410e3af85c34c377fea812a
+# "id": "6410e3af85c34c377fea812a"
+###
+
+GET http://localhost:5000/api/v1/admin/users/64386e38f60ee89177afa251
+###
+
+GET http://localhost:5000/api/v1/admin/orders?page=1&sortBy=createdAt
+
+### ADMIN GET ALL ORDERS
+GET http://localhost:5000/api/v1/admin/orders?page=1&limit=100&sortBy=createdAt&OrderBy=desc&filterBy=category&category=Coursework
+
+### ADMIN GET ONE ORDER
+GET http://localhost:5000/api/v1/admin/orders/64447749acf9f7b65e211275
+###
+http://localhost:5000/api/v1/orders/643b829ce0de4cbb5e4aa51c
+
+### USER GET ALL ORDERS
+GET http://localhost:5000/api/v1/user/orders?page=1&limit=80&sortBy=createdAt&OrderBy=desc&filterBy=category
+
+### USER GET AN ORDER
+GET http://localhost:5000/api/v1/user/orders/643b829ce0de4cbb5e4aa51c
+#64386e77f60ee89177afa256
+###
+
+POST http://localhost:5000/api/v1/auth/userId
+
+
+
+

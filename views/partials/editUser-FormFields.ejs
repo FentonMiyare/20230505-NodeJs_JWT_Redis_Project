@@ -1,0 +1,187 @@
+<div class="row">
+  <div>
+    <label for="username"
+      >Username <%- include('./_tooltip.ejs', { info: `If you need to, replace
+      your current user name with another that fits your needs` }) %>
+    </label>
+    <input
+      type="text"
+      name="username"
+      value="<%= user.username %>"
+      placeholder="e.g JohnTheDoe"
+      id=""
+    />
+    <span class="error"></span>
+  </div>
+  <div>
+    <label for="email"
+      >Email <%- include('./_tooltip.ejs', { info: `If you cahnge this current
+      email, a validation code will be sent to this new one for verification.
+      You must then verify to log in again.` }) %>
+    </label>
+    <input
+      type="email"
+      name="email"
+      value="<%= user.email %>"
+      placeholder="e.g JohnTheDoe@abc.com"
+      id=""
+    />
+    <span class="error"></span>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <label for="whatsAppNumber"
+      >WhatsApp No. <%- include('./_tooltip.ejs', { info: `This number is very
+      important for ease of communication with your writer. Must be valid and up
+      to date` }) %>
+    </label>
+    <input
+      type="text"
+      name="whatsAppNumber"
+      value="<%= user.whatsAppNumber %>"
+      placeholder="e.g +1800123456"
+      autofocus
+      id="WhatsApp"
+      required
+    />
+    <span class="error"></span>
+  </div>
+  <div></div>
+</div>
+
+<div class="row">
+  <div>
+    <label for="course"
+      >Field of study <%- include('./_tooltip.ejs', { info: `Our algorithim
+      works wonders by connecting you to a pool of best writers based on your
+      field of study` }) %>
+    </label>
+    <input
+      type="text"
+      name="course"
+      value="<%= user.course %>"
+      placeholder="e.g Computer Science"
+      id="course"
+    />
+    <span class="error"></span>
+  </div>
+  <div>
+    <label for="nationality"
+      >Nationality <%- include('./_tooltip.ejs', { info: `Make sure you add your
+      nationality precisely. Different regions of the world have different
+      preferences in writing formats.` }) %>
+    </label>
+    <input
+      type="tel"
+      name="nationality"
+      value="<%= user.nationality %>"
+      placeholder="e.g USA"
+      id="nationality"
+    />
+    <span class="error"></span>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <label for="favoriteColor"
+      >Favorite Color/s <%- include('./_tooltip.ejs', { info: `This is an
+      optional field but may come in handy in case you forget you password.` })
+      %>
+    </label>
+    <input
+      type="text"
+      name="favoriteColor[]"
+      value="<%= user.favoriteColor %>"
+      placeholder="e.g Blue"
+      id="fav_color"
+    />
+    <span class="error"></span>
+  </div>
+  <div>
+    <label for="favoritePet"
+      >Favorite Pet/s <%- include('./_tooltip.ejs', { info: `Optional field, you
+      may add one or more pets.` }) %>
+    </label>
+    <input
+      type="text"
+      name="favoritePet[]"
+      value="<%= user.favoritePet %>"
+      placeholder="e.g Pug"
+      id="fav_pet"
+    />
+    <span class="error"></span>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <label for="profileImage"
+      >Profile Image <%- include('./_tooltip.ejs', { info: `Change your profile
+      picture.` }) %>
+    </label>
+    <!-- <input
+      type="text"
+      name="profileImage"
+      value="<%= user.profileImage %>"
+      placeholder="Add an image file"
+      id="p_image"
+    /> -->
+    <div class="field uploader">
+      <input id="file-upload" type="file" name="profileImage" />
+
+      <label for="file-upload" id="file-drag">
+        <img id="file-image" src="#" alt="Preview" class="hidden" />
+        <div id="start">
+          <i class="fa fa-download" aria-hidden="true"></i>
+          <div>Select a file or drag here</div>
+          <div id="notimage" class="hidden">Please select an image</div>
+          <span id="file-upload-btn" class="btn btn-primary"
+            >Select a file</span
+          >
+        </div>
+        <div id="response" class="hidden">
+          <div id="messages"></div>
+          <progress class="progress" id="file-progress" value="0">
+            <span>0</span>%
+          </progress>
+        </div>
+      </label>
+    </div>
+    <span class="error"></span>
+  </div>
+  <div>
+    <label for="bio"
+      >Bio <%- include('./_tooltip.ejs', { info: `You bio must be consice and
+      straight to the point. Avoid side shows and unneccessary jargons.` }) %>
+    </label>
+    <!-- <input
+      type="text"
+      name="bio"
+      value="<%= user.bio %>"
+      placeholder="Must be max 500 characters long..."
+      id="bio"
+    /> -->
+    <textarea
+      class="input__form two"
+      type="text"
+      name="bio"
+      value="<%= user.bio %>"
+      placeholder="Must be at most max 500 characters long..."
+      id="bio"
+      cols="30"
+      rows="5"
+    >
+<%= user.bio %></textarea
+    >
+    <span class="error"></span>
+  </div>
+</div>
+
+<!-- <div class="editform_field">
+    <label for="profileImage">Profile Image</label>
+    <input type="file" name="profileImage" value="" id="user_file" />
+    <span class="error"></span>
+  </div> -->

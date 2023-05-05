@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <div class="wrapper">
+      <header class="header" role="banner" aria-label="The Top">
+        <%- include("./partials/nav.ejs") %>
+
+        <section class="section__img">
+          <img src="/svg/icon/order.svg" alt="svg image" />
+        </section>
+
+        <main class="[ flow ] [ main ]">
+          <h1 class="main__heading">Order by, <%= order.user.username %></h1>
+          <h2 class="main__sub">Welcome!</h2>
+          <a class="main__button" href="/"><span>Back Home</span></a>
+        </main>
+
+        <!--Waves Container-->
+        <%- include("./partials/waves.ejs") %>
+        <!--Waves end-->
+      </header>
+
+      <section id="insta_nav">
+        <div class="insta_nav">
+          <nav class="content__sidebar-inner">
+            <h2>Summary</h2>
+            <ul id="table-of-contents"></ul>
+          </nav>
+        </div>
+      </section>
+
+      <article>
+        <section class="section">
+          <div class="container">
+            <div class="row">
+              <div class="profile_image">
+                <h2>Order Summary</h2>
+                <!-- <div class="img">
+                </div> -->
+                <div class="user_dates">
+                  <p><strong>Order Id:</strong> <%= order._id %></p>
+                  <p><strong>Order Title:</strong> <%= order.title %></p>
+                  <p><strong>Assignment:</strong> <%= order.work %></p>
+                  <p><strong>Format:</strong> <%= order.format %></p>
+                  <p><strong>Academic Level:</strong> <%= order.level %></p>
+                  <p><strong>Deadline:</strong> <%= order.deadline %></p>
+                  <p><strong>Pages:</strong> <%= order.pages %></p>
+                  <p><strong>Spacing:</strong> <%= order.spacing %></p>
+                  <% console.log("FILE:", order.fileUpload) %>
+                  <p>
+                    <% for (let i = 0; i < order.fileUpload.length; i++) { %>
+                    <strong>File:</strong> <%= order.fileUpload[i] %> <% } %>
+                  </p>
+                  <p>
+                    <strong>Added on:</strong> <%=
+                    order.addedDate.toDateString() %>
+                  </p>
+                </div>
+                <div class="btn_grp">
+                  <a href="/api/v1/admin/users/<%= order.user._id %>"
+                    >Contact User</a
+                  >
+                  <%- include("./partials/deleteForm.ejs", { url:
+                  `/api/v1/admin/orders/${order._id}`, name: `Delete Order` })
+                  %>
+                </div>
+              </div>
+              <div class="profile_info">
+                <h2>User Details</h2>
+                <p>
+                  <strong>User: </strong>
+                  <span id="token"><%= order.user.username %></span>
+                </p>
+                <p>
+                  <strong>Email: </strong
+                  ><span id="email"
+                    ><a
+                      href="mailto:<%= user.email %>"
+                      target="_blank noreferrer"
+                      ><%= order.user.email %></a
+                    ></span
+                  >
+                </p>
+                <p>
+                  <strong>Phone Number: </strong
+                  ><span id="email"
+                    ><a
+                      href="tel:+<%= user.whatsAppNumber %>"
+                      target="_blank noreferrer"
+                      ><%= order.user.whatsAppNumber %></a
+                    ></span
+                  >
+                </p>
+                <h3>Authorities:</h3>
+                <% for (let i = 0; i < user.roles.length; i++) { %>
+                <ul id="authorities">
+                  <li><%= `ROLE_${user.roles[i].name.toUpperCase()}` %></li>
+                </ul>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="container">
+            <h2>Paper Details</h2>
+            <h3>
+              Before writing this paper, please read the following client's
+              instructions carefully. Only then can you embark on the writing
+              process.
+            </h3>
+            <p><%= order.paperDetails%></p>
+          </div>
+        </section>
+      </article>
+      <%- include('partials/footer'); -%>
+    </div>
+    <script src="/js/main.js" type="module"></script>
+  </body>
+</html>

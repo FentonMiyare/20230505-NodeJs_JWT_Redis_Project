@@ -1,0 +1,62 @@
+{
+  "name": "node-js-jwt-refresh-token-mongodb",
+  "version": "1.0.0",
+  "description": "Node.js JWT Refresh Token with MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "jwt",
+    "refresh token",
+    "authentication",
+    "authorization",
+    "mongodb",
+    "redis"
+  ],
+  "author": "Fenton",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "colors": "^1.4.0",
+    "compression": "^1.7.4",
+    "connect-redis": "^7.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "errorhandler": "^1.5.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "formidable": "^2.1.1",
+    "http-errors": "^2.0.0",
+    "joi": "^17.8.3",
+    "jsonwebtoken": "^9.0.0",
+    "method-override": "^2.3.10",
+    "mongod": "^2.0.0",
+    "mongoose": "^5.13.16",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "pug": "^3.0.2",
+    "redis": "^4.6.5",
+    "serve-favicon": "^2.5.0",
+    "serve-index": "^1.9.1",
+    "serve-static": "^1.15.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
+    "uuid": "^8.3.2",
+    "winston": "^3.8.2",
+    "winston-mongodb": "^5.1.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
+    "request": "^2.88.2"
+  }
+}

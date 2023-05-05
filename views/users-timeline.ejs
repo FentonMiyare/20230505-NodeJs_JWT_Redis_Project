@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <div class="wrapper">
+      <%- include("./partials/nav.ejs") %>
+
+      <header class="header" role="banner" aria-label="The Top">
+        <%- include("./partials/nav.ejs") %>
+
+        <section class="section__img">
+          <img src="/svg/icon/all_users.svg" alt="svg image" />
+        </section>
+
+        <main class="[ flow ] [ main ]">
+          <h1 class="main__heading">ALL USERS</h1>
+          <h2 class="main__sub"><strong>User</strong> Profiles</h2>
+          <a
+            class="main__button"
+            href="/api/v1/admin/users?page=1&sortBy=createdAt"
+            ><span>[Button]</span></a
+          >
+        </main>
+
+        <!--Waves Container-->
+        <%- include("./partials/waves.ejs") %>
+        <!--Waves end-->
+      </header>
+
+      <section id="insta_nav">
+        <div class="insta_nav">
+          <nav class="content__sidebar-inner">
+            <h2>Summary</h2>
+            <ul id="table-of-contents"></ul>
+          </nav>
+        </div>
+      </section>
+
+      <article>
+        <section class="section">
+          <div class="container">
+            <ul class="recipes">
+              <% users.users.forEach(user => { %>
+              <li class="recipe">
+                <img src="<%= user.profileImage %>" alt="profile Image" />
+                <h4><%= user.username %></h4>
+                <div class="btn_grp">
+                  <a href="/api/v1/admin/users/<%= user._id %>">View Profile</a>
+                  <%- include("./partials/deleteForm.ejs", { url:
+                  `/api/v1/admin/users/${user._id}`, name: `Delete Profile` })
+                  %>
+                  <!-- <a href="/api/v1/admin/users/<%= user.id %>">Delete</a> -->
+                </div>
+              </li>
+              <% }) %>
+            </ul>
+            <a href="/api/v1/admin/users?page=2&sortBy=createdAt">Next Page</a>
+          </div>
+        </section>
+      </article>
+
+      <%- include('partials/footer'); -%>
+    </div>
+    <script src="/js/main.js" type="module"></script>
+  </body>
+</html>

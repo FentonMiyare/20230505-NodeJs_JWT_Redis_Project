@@ -1,0 +1,3 @@
+{"level":"error","message":"\u001b[4m\u001b[36mMongoDB database connection established successfully.\u001b[39m\u001b[24m","service":"user-service","timestamp":"2023-03-15 15:40:51"}
+{"level":"error","message":"MongoDB connection error. Please make sure MongoDB is running: connect ECONNREFUSED 127.0.0.1:27017","service":"user-service","timestamp":"2023-04-04 02:40:09"}
+{"level":"error","message":"MongoDB connection error. Please make sure MongoDB is running: Server selection timed out after 2000 ms","service":"user-service","timestamp":"2023-05-04 12:26:57"}

@@ -1,0 +1,52 @@
+{
+  "writersData": [
+    {
+      "firstName": "Angela",
+      "lastName": "Yun",
+      "profile": "hello hello, I'm angela, artist and developer 🌼 student at stanford; intern at zynga 🌱 happy to be here! 🌿 let's code the best we can!",
+      "orders": "1229",
+      "reviews": "684",
+      "photo": "/img/writers/2.jpg"
+    },
+    {
+      "firstName": "Alex",
+      "lastName": "Don",
+      "profile": "hello hello, I'm Alex, artist and developer 🌼 student at stanford; intern at zynga 🌱 happy to be here! 🌿 let's code the best we can!",
+      "orders": "1142",
+      "reviews": "704",
+      "photo": "/img/writers/1.jpg"
+    },
+    {
+      "firstName": "Gabriel",
+      "lastName": "Lewis",
+      "profile": "hello hello, I'm Gabriel, artist and developer 🌼 student at stanford; intern at zynga 🌱 happy to be here! 🌿 let's code the best we can!",
+      "orders": "988",
+      "reviews": "414",
+      "photo": "/img/writers/16.jpg"
+    },
+    {
+      "firstName": "Lisa",
+      "lastName": "Kimberly",
+      "profile": "hello hello, I'm Lisa, artist and developer 🌼 student at stanford; intern at zynga 🌱 happy to be here! 🌿 let's code the best we can!",
+      "orders": "912",
+      "reviews": "332",
+      "photo": "/img/writers/6.jpg"
+    },
+    {
+      "firstName": "James",
+      "lastName": "Brown",
+      "profile": "hello hello, I'm James, artist and developer 🌼 student at stanford; intern at zynga 🌱 happy to be here! 🌿 let's code the best we can!",
+      "orders": "824",
+      "reviews": "324",
+      "photo": "/img/writers/22.jpg"
+    },
+    {
+      "firstName": "Tamika",
+      "lastName": "Jones",
+      "profile": "hello hello, I'm Tamika, artist and developer 🌼 student at stanford; intern at zynga 🌱 happy to be here! 🌿 let's code the best we can!",
+      "orders": "882",
+      "reviews": "320",
+      "photo": "/img/writers/18.jpg"
+    }
+  ]
+}

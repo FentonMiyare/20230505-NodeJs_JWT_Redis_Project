@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <div class="wrapper">
+    <header class="header" role="banner" aria-label="The Top">
+      
+      <%- include("./partials/nav.ejs") %>
+    
+      <section class="section__img">
+        <img src="/svg/icon/telephone.svg" alt="svg image">
+      </section>
+      
+      <main class="[ flow ] [ main ]">
+        <h1 class="main__heading">Contact Us Or Email Support</h1>
+        <h2 class="main__sub">Dearest Customers.. <br /> Have a question or request? We are all ears! Share your order instructions to let us kickstart your paper now. We’re always here and happy to answer all your questions regarding our service.</h2>
+        
+        <h3 class="main__h3">Say Hi! Or</h3>
+        <a class="main__button" href="/order-page"><span>Write A Message</span></a>
+      </main>
+    
+        <!--Waves Container-->
+      <%- include("./partials/waves.ejs") %>
+    <!--Waves end-->
+    </header>
+    
+    <section id="insta_nav">
+      <div class="insta_nav">
+        <nav class="content__sidebar-inner">
+          <h2>Summary</h2>
+          <ul id="table-of-contents"></ul>
+        </nav>
+      </div>
+    </section>
+      
+    <article>
+      <section class="section">
+        <div class="container">
+          <div>
+            <h3>Drop your inquiries</h3>
+            <p>Can't find your answer? Student support is available by phone, chat, and e-mail. Drop your inquiries <span>here</span> and our experts will get back to you.</h3>
+            <h4>Address</h4>
+            <p class="address">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, rerum.
+            </p>
+            <h4>Email</h4>
+            <p class="mail">E-mail the support team or submit documents using <a class="inline_link" href="mailto:TheTOP@gmail.com">TheTop.org Help Center</a>.</p>
+          </div>
+          <div class="row">
+        <div class="col four">
+          <i class="icon"><img class="svg" src="/svg/icon/writer.svg" alt="svg"></i>
+          <h3 class="service">Friendly Team</h3>
+          <p>We’ve got a super friendly support team dedicated to help guide you through our service and make your experience on WritePaper positive and fruitful.</p>
+        </div>
+        <div class="col four">
+          <i class="icon"><img class="svg" src="/svg/icon/24-hours-support-svgrepo-com.svg" alt="svg"></i>
+          <h3 class="service">24/7 Support</h3>
+          <p>Text us, we’re here 24/7, and we’re super excited to lend a hand, hear your feedback, or simply wish you a great day!</p>
+        </div>
+        <!--div class="responsivegroup"></div-->
+        <div class="col four">
+          <i class="icon"><img class="svg" src="/svg/icon/write-svgrepo-com.svg" alt="svg"></i>
+          <h3 class="service">Dissertation Paper Writing</h3>
+          <p>Stop chasing down deadlines to submit assignments, you're not really doing yourself a favor. We should be doing this work for you!</p>
+        </div>
+        <div class="group"></div>
+      </div>
+        </div>
+      </section>
+      
+      <!-- <section class="section">
+        <div class="container">
+        </div>
+      </section> -->
+      
+      <section class="section contact">
+        <!--class="contact_heading"-->
+        <h2 class="bp-ad-title">Get In Touch</h2>
+        <div class="cont container">
+          <div class="contact-text">
+            <div>
+              <h3>Want to get a flash response?</h3>
+              <p>Contact our round-the-clock support via live chat to get an instant response.</p>
+              <a href="" type="button" class="contact__btn">Live Chat</a>
+            </div>
+            
+            <br />
+            
+            <div>
+              <h3>Have a general query?</h3>
+              <p>If you have questions regarding our services, please email Customer Support.</p>
+              <a href="" type="button" class="contact__btn">Send Email</a>
+            </div>
+          </div>
+          <div class="contact-form">
+            <form>
+              <label for="name"><strong>Name</strong></label>
+              <input type="text" name="name" id="name" required>
+              <label for="email"><strong>Email</strong></label>
+              <input type="email" name="email" id="email" required>
+              <label for="message"><strong>Message</strong></label>
+              <textarea name="message" id="message" cols="30" rows="5" required></textarea>
+              <input type="submit" value="submit">
+            </form>
+          </div>
+        </div>
+      </section>
+    </article>
+    
+    <%- include('partials/footer'); -%>
+    
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

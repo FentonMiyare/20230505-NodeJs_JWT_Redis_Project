@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <div class="wrapper">
+      <header class="header" role="banner" aria-label="The Top">
+        <div class="header__wrapper">
+          <a href="/">
+            <div class="header__logo">
+              <img
+                srcset="/img/Logo.jpg"
+                src="/img/Logo.jpg"
+                alt="Logo"
+                width="50"
+              /><span>TheTOP</span>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <section class="order">
+        <div class="container">
+          <h2>Welcome to TheTOP.org Online Order Page</h2>
+          <p>
+            You’re minutes away from starting your education excellence with
+            TheTOP.org! Take that first step by completing the following order
+            form.
+          </p>
+          <!-- <div class="loading__circle">.</div> -->
+          <p>
+            <strong
+              >No hidden charges. Sign up and order by
+              <span id="discount"></span> and we'll let you in on a one-time
+              customer discount.</strong
+            >
+          </p>
+          <% if(user) { %>
+          <h3>
+            Welcome back and thank you for trusting us. Please claim your
+            <a id="link" href="/api/v1/discount">discount</a> and continue with
+            your order.
+          </h3>
+          <% } else { %>
+          <h3>
+            Are you a returning applicant?
+            <a id="link" href="/login">Sign In</a> to continue with your order.
+          </h3>
+          <% } %>
+        </div>
+      </section>
+
+      <section class="order">
+        <div class="form__container">
+          <!--enctype="multipart/form-data"
+          action="/api/v1/orders"-->
+          <form
+            class="myForm"
+            id="myForm"
+            enctype="multipart/form-data"
+            action="/api/v1/orders"
+            method="POST"
+            accept-charset="utf-8"
+          >
+            <div class="step-1" id="checkout-progress" data-current-step="1">
+              <div class="progress-bar">
+                <div class="step step-1 active">
+                  <span> 1</span>
+                  <div class="fa fa-check opaque"></div>
+                  <div class="step-label">Paper Type</div>
+                </div>
+                <div class="step step-2">
+                  <span> 2</span>
+                  <div class="fa fa-check opaque"></div>
+                  <div class="step-label">Additional <br />Information</div>
+                </div>
+                <div class="step step-3">
+                  <span> 3</span>
+                  <div class="fa fa-check opaque"></div>
+                  <div class="step-label">Create Order</div>
+                </div>
+                <div class="step step-4">
+                  <span> 4</span>
+                  <div class="fa fa-check opaque"></div>
+                  <div class="step-label">Checkout</div>
+                </div>
+              </div>
+            </div>
+            <div id="margin40"></div>
+
+            <br />
+
+            <div id="section1" class="section section1" style="display: block">
+              <h2 class="title is-4">Make An Order</h2>
+
+              <div class="field">
+                <div class="addon__buttons" required>
+                  <label data-addon="addon-1" class="addon__button">
+                    Writing
+                    <input
+                      type="radio"
+                      name="Work"
+                      class="radio"
+                      data-bind
+                      aria-checked="true"
+                      value="Writing"
+                      checked
+                    />
+                  </label>
+                  <label data-addon="addon-2" class="addon__button">
+                    Rewriting
+                    <input
+                      type="radio"
+                      name="Work"
+                      class="radio"
+                      data-bind
+                      value="Rewriting"
+                    />
+                  </label>
+                  <label data-addon="addon-3" class="addon__button">
+                    Editing
+                    <input
+                      type="radio"
+                      name="Work"
+                      class="radio"
+                      data-bind
+                      value="Editing"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="select">
+                  <label for="Type-of-paper">
+                    Type of Paper <%- include('./partials/_tooltip.ejs', { info:
+                    `Quality custom papers for any type of writing in any
+                    discipline.` }) %>
+                  </label>
+                  <select name="Type" required data-required="Required">
+                    <option value="">Select...</option>
+                    <option value="Essay (Any Type)">Essay (Any Type)</option>
+                    <option value="Admission Essay">Admission Essay</option>
+                    <option value="Annotated Bibliography">
+                      Annotated Bibliography
+                    </option>
+                    <option value="Article Review">Article Review</option>
+                    <option value="Article Writing">Article Writing</option>
+                    <option value="Coursework">Coursework</option>
+                    <option value="Term Paper">Term Paper</option>
+                    <option value="Business Plan">Business Plan</option>
+                    <option value="Business Proposal">Business Proposal</option>
+                    <option value="Research">Research Paper</option>
+                    <option value="Book Report">Book Report</option>
+                    <option value="Case Study">Case study</option>
+                    <option value="Critical Thinking">Critical Thinking</option>
+                    <option value="Movie Review">Movie Review</option>
+                    <option value="Reflective Writing">
+                      Reflective Writing
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="select">
+                  <label for="Paper Format">
+                    Paper Format <%- include('./partials/_tooltip.ejs', { info:
+                    `Provide format guidelines for things like font choices,
+                    page layout, format of headings and the format of the
+                    reference page.` }) %>
+                  </label>
+                  <select name="Format" required data-required="Required">
+                    <option value="">Select...</option>
+                    <option value="MLA">MLA</option>
+                    <option value="Harvard">Harvard</option>
+                    <option value="APA">APA</option>
+                    <option value="Chicago">Chicago</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field double-select">
+                <div class="select select-2">
+                  <label for="academic-level">
+                    Academic Level <%- include('./partials/_tooltip.ejs', {
+                    info: `Show prices per page, which are different depending
+                    on the academic level and the complexity of the assignment`
+                    }) %>
+                  </label>
+                  <select
+                    id="select-1"
+                    name="Level"
+                    required
+                    data-required="Required"
+                  ></select>
+                </div>
+                <div class="select select-2">
+                  <label for="deadline">
+                    Deadline <%- include('./partials/_tooltip.ejs', { info: `The
+                    countdown starts from the time you receive an email
+                    confirming receipt of payment. It takes about an hour/page
+                    to compose a quality paper` }) %>
+                  </label>
+                  <select
+                    id="select-2"
+                    name="Deadline"
+                    required
+                    data-required="Required"
+                  ></select>
+                </div>
+              </div>
+
+              <div class="field">
+                <div>
+                  <label data-label-counter for="input-top">
+                    Number of Pages <%- include('./partials/_tooltip.ejs', {
+                    info: `Select the required number of pages (1 page is
+                    approximately 300 words)` }) %>
+                  </label>
+                </div>
+                <div class="number-input-container">
+                  <button
+                    type="button"
+                    class="button-decrement"
+                    data-input-id="hue"
+                    data-operation="decrement"
+                  ></button>
+                  <div class="number-input">
+                    <input
+                      type="number"
+                      id="hue"
+                      name="Quantity"
+                      class="number-input-text-box"
+                      value="1"
+                      min="1"
+                      max="20"
+                      oninput="handleNumberInput()"
+                      onblur="handleNumberInputBlur(event)"
+                      data-step="1"
+                      readonly
+                      required
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="button-increment"
+                    data-input-id="hue"
+                    data-operation="increment"
+                  ></button>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <label>
+                    <input
+                      type="radio"
+                      name="Spacing"
+                      class="radio spacing"
+                      value="Single"
+                      aria-checked="true"
+                      checked
+                    />
+                    Single Spaced
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="Spacing"
+                      value="Double"
+                      class="radio spacing"
+                    />
+                    Double Spaced
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="section2" class="section section2" style="display: none">
+              <h2 class="title is-4">Additional Information</h2>
+              <div>
+                <div class="field">
+                  <label class="label">
+                    Title <%- include('./partials/_tooltip.ejs', { info: `Make
+                    sure the topic of your paper is short and clear. Leave it
+                    "Writer's Choice" if you want us to choose` }) %>
+                  </label>
+                  <div class="control">
+                    <input
+                      class="input__form one"
+                      type="text"
+                      name="Title"
+                      value="Writer's Choice"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">
+                    Paper Details <%- include('./partials/_tooltip.ejs', { info:
+                    `Provide the instructions and make sure they are complete
+                    and accurate. Specify the number of sources to be used (if
+                    any)` }) %>
+                  </label>
+                  <div class="control">
+                    <!-- <input
+                      class="input__form two"
+                      type="text"
+                      name="PaperDetails"
+                      placeholder="Please provide specific and detailed instructions about your paper. Min:10"
+                    /> -->
+                    <textarea
+                      class="input__form two"
+                      type="text"
+                      name="PaperDetails"
+                      placeholder="Please provide specific and detailed instructions about your paper. Max:600 characters."
+                      id="message"
+                      cols="30"
+                      rows="5"
+                    ></textarea>
+                  </div>
+                  <p class="help is-success">
+                    No credentials and personal access to external resources are
+                    allowed.
+                  </p>
+                </div>
+                <div class="field uploader">
+                  <input id="file-upload" type="file" name="fileUpload" />
+
+                  <label for="file-upload" id="file-drag">
+                    <img id="file-image" src="#" alt="Preview" class="hidden" />
+                    <div id="start">
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                      <div>Select a file or drag here</div>
+                      <div id="notimage" class="hidden">
+                        Please select an image
+                      </div>
+                      <span id="file-upload-btn" class="btn btn-primary"
+                        >Select a file</span
+                      >
+                    </div>
+                    <div id="response" class="hidden">
+                      <div id="messages"></div>
+                      <progress class="progress" id="file-progress" value="0">
+                        <span>0</span>%
+                      </progress>
+                    </div>
+                  </label>
+                </div>
+                <br />
+              </div>
+            </div>
+            <div id="section3" class="section section3" style="display: none">
+              <h2 class="title is-4">Order Summary</h2>
+              <div class="table__data">
+                <!--div class="summary">
+                <h2>Summary</h2>
+                <ul id="list" class="list"></ul>
+              </div-->
+
+                <table id="tableList" border="0">
+                  <tr>
+                    <td id="work"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="paper"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="format"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="level"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="deadline"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="quantity"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="space"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="title"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="paper__details"><span></span></td>
+                  </tr>
+                  <tr>
+                    <td id="doc"><span></span></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="bold__type">
+                <h3>You're almost there...!</h3>
+              </div>
+            </div>
+            <div id="section4" class="section section4" style="display: none">
+              <h2 class="title is-4">Checkout</h2>
+              <div class="row">
+                <div>
+                  <img
+                    class="svg"
+                    src="/svg/icon/lock-svgrepo-com.svg"
+                    alt="Lock SVG"
+                  />
+                  <h3>Your Information is Safe</h3>
+                  <p>
+                    We will not sell or rent your personal contact information
+                    for any marketing purposes whatsoever.
+                  </p>
+                </div>
+                <div>
+                  <img
+                    class="svg"
+                    src="/svg/icon/key-password-svgrepo-com.svg"
+                    alt="Password SVG"
+                  />
+                  <h3>Secure Checkout</h3>
+                  <p>
+                    All information is encrypted and transmitted without risk
+                    using a <strong>Secure Socket Layer</strong> protocol.
+                    <br />
+                    You can trust us!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div id="section5" class="section section5" style="display: none">
+              <h2 class="title is-4">Submitted Successfully!!</h2>
+            </div>
+
+            <br />
+            <br />
+
+            <div class="bill">Bill: <span>$12.00</span></div>
+            <div class="button-container">
+              <div class="btn btn-prev">previous step</div>
+              <div class="btn btn-next">next step</div>
+              <button
+                class="btn btn-submit form__btn"
+                type="submit"
+                style="display: none"
+              >
+                Safe Checkout
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Notification -->
+        <div class="notification-container" id="notification">
+          <p>Please fill in all the required fields!</p>
+        </div>
+      </section>
+    </div>
+    <!--script src="main.js"></script-->
+    <!--script src="js/order.js"></script-->
+
+    <script src="/js/main.js"></script>
+    <script src="/js/order.js"></script>
+  </body>
+</html>
