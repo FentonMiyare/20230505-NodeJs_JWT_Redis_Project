@@ -390,10 +390,6 @@ Project is: in progress I'm working on it in my free time
 
 ![image](screenshots/forgotPassword_page_screenshot..png)
 
-### Reset Password email Link
-
-![image](https://user-images.githubusercontent.com/51326421/168418151-aaf3a8d4-03b5-4011-aff2-7b42e53a4425.png)
-
 ### Home Page
 
 ![image](screenshots/homepage_screenshot.png)
