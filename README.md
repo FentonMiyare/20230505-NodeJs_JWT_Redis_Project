@@ -394,16 +394,6 @@ Project is: in progress I'm working on it in my free time
 
 ![image](https://user-images.githubusercontent.com/51326421/168418151-aaf3a8d4-03b5-4011-aff2-7b42e53a4425.png)
 
-### Reset Password Page
-
-![image](https://user-images.githubusercontent.com/51326421/168418261-2c4cb6cb-42b6-44b3-8b98-b91da31f2252.png)
-
-![image](https://user-images.githubusercontent.com/51326421/168420074-88a7ff38-e9cc-421c-917f-3070223021fb.png)
-
-### Update Profile Page
-
-![image](https://user-images.githubusercontent.com/51326421/168419955-ca2231ab-457f-4d48-8188-025e2a931d45.png)
-
 ### Home Page
 
 ![image](screenshots/homepage_screenshot.png)
@@ -419,10 +409,6 @@ Project is: in progress I'm working on it in my free time
 ### Active State Orders Page
 
 ![image](screenshots/orderpage_activestate_screenshot.png)
-
-### Admin Products Page
-
-![image](https://user-images.githubusercontent.com/51326421/168417651-8ea633e1-13c6-4707-8127-69e6e133ff58.png)
 
 ### Admin Page
 
@@ -448,27 +434,4 @@ Project is: in progress I'm working on it in my free time
 
 ![image](screenshots/user_dashboard_screenshot.png)
 
-### Admin Users Table Page
-
-![image](https://user-images.githubusercontent.com/51326421/168417814-c7e859f3-6a79-48df-8560-0bb2de53bfc4.png)
-
-### Admin Add Product Page
-
-![image](https://user-images.githubusercontent.com/51326421/168417851-4396ddbd-d7cb-4d50-bb78-df36b4583c8e.png)
-
-![image](https://user-images.githubusercontent.com/51326421/168419929-81f17f43-dbbd-4d80-b7fb-2d614e88b607.png)
-
-### Admin Update Product Page
-
-![image](https://user-images.githubusercontent.com/51326421/168417887-ff0a9660-4955-474f-a87f-4f0aaeebc2e8.png)
-
-### Admin Add User Page
-
-![image](https://user-images.githubusercontent.com/51326421/168417951-0f454bc3-fb59-42cb-b764-2059135a6043.png)
-
-![image](https://user-images.githubusercontent.com/51326421/168419886-f8be1530-7131-4625-b044-292fbc6ed3c3.png)
-
-### Admin Update User Page
-
-![image](https://user-images.githubusercontent.com/51326421/168417927-567f47b6-748e-4fc1-9ea0-a45d71f5c660.png)
 # 20230505-NodeJs_JWT_Redis_Project
