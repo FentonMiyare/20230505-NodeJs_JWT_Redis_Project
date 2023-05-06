@@ -299,30 +299,6 @@ To deploy this project on Heroku Flow the Flowing documentation <a href="https:/
 
 ### API Projects built with | Nodejs + Express + Mongodb
 
-<!-- #### <a href="https://blog-post-api-sadam.herokuapp.com">LIVE API</a>
-
-#### <a href="https://github.com/saddamarbaa/blog-api">API REPO</a>
-
-#### <a href="https://github.com/saddamarbaa/blog-post-front-end-vanillaJS">Front-End REPO</a>
-
-#### <a href="https://saddamarbaa-blog.netlify.app/"> LIVE Webside DEMO </a>
-
-### Twitter API built with | Nodejs + Express + Mongodb
-
-#### <a href="https://twitter-clone-app-saddam.herokuapp.com/">LIVE API Demo</a>
-
-#### <a href="https://github.com/saddamarbaa/twitter-clone-api">API REPO</a>
-
-#### <a href="https://github.com/saddamarbaa/twitter-clone-app">Front-End REPO</a>
-
-#### <a href="https://twitter-clone-saddam.netlify.app/">LIVE Webside DEMO </a>
-
-### Netflix API built with | Nodejs + Express + Mongodb
-
-#### <a href="https://github.com/saddamarbaa/netflix-clone-api">API REPO</a>
-
-#### <a href="https://nefilx-saddam.herokuapp.com/">LIVE API Demo</a> -->
-
 ## Support
 
 For support, email makavelimiyare88@gmail.com.
