@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
   title: JWT Refresh-Token-NodeJs-MongoDB API
   description: This is an Open Source CRUD API application built with | Nodejs, Express, Redis Mongodb and made with developer experience first; Prettier and VSCode setup available, documented with Swagger
@@ -29,105 +29,71 @@ tags:
     description: Access to orders
 schemes: [http, https]
 
-#Return Users From get request
 paths:
-  /string:
-    get:
-      summary: Returns a string.
-      description: String Chechup
-      responses:
-        200:    # status code
-          description: Successul Response
-          schema:
-            $ref: '#/components/schemas/Response'
-            example:
-              data: {}
-              success: true
-              error: false
-              message: "Users String"
-              status: 200
-        400:
-          description: User Error
-          schema:
-            $ref: '#/components/schemas/Error'
-            example:
-              data: {}
-              success: false
-              error: true
-              message: "Unauthorized"
-              status: 400
-              stack: "BadRequestError"
-            
-  /api/v1/auth/signup:
-    post:
-      tags:
-        - auth
-      summary: Authenticate account credentials and return a JWT token and a cookie with a refresh token
-      description: Accounts must be verified before authenticating
-      operationId: createUser
-      security:
-        - bearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-        description: Created user object
-        required:
-          - username
-          - email
-          - password
-          - confirmPassword
-      responses:
-        201:
-          description: User created successfully!
-          schema:
-            $ref: '#/components/schemas/Response'
-            example:
-              data: {}
-              success: true
-              error: false
-              message: "Registration successful, please check your email for verification instructions"
-              status: 201
-        500:
-          description: Server Error
-          schema:
-            $ref: '#/components/schemas/Error'
-            example:
-              data: {}
-              success: false
-              error: true
-              message: "InternalServerError"
-              status: 400
-              stack: "InternalServerError"
-        409:
-          description: User Error
-          schema:
-            $ref: '#/components/schemas/Error'
-            example:
-              data: {}
-              success: false
-              error: true
-              message: "Conflict"
-              status: 409
-              stack: "ConflictError"
-
   /api/v1/auth/login:
     post:
       tags:
         - auth
-      summary: Login a user
-      description: Logs in a use in the system
-      operationId: loginUser
-
-  /api/v1/auth/signout:
-    post:
-      tags:
-        - auth
-      summary: Login a user
-      description: Logs in a use in the system
-      operationId: loginUser
-
+      summary: Authenticate account credentials and return a JWT token and a cookie with a refresh token
+      description: Accounts must be verified before authenticating.
+      operationId: authenticate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "user01"
+                password:
+                  type: string
+                  example: "Abc123"
+              required:
+                - username
+                - password
+      responses:
+        "200":
+          description: Account details, a JWT access token and a refresh token cookie
+          headers:
+            Set-Cookie:
+              description: "`refreshToken`"
+              schema:
+                type: string
+                example: refreshToken=019a44ba-4707-4f8b-8ee5-2bae759c0389; Path=/; Expires=Tue, 16 Jun 2020 09:14:17 GMT; HttpOnly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  username:
+                    type: string
+                    example: "Jason"
+                  email:
+                    type: string
+                    example: "jason@example.com"
+                  role:
+                    type: array
+                      items:
+                        type: string
+                    example: ["Admin", "writer", "user"]
+                  created:
+                    type: string
+                    example: "2020-05-05T09:12:57.848Z"
+                  isVerified:
+                    type: boolean
+                    example: true
+                  x-access-token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWIxMmUxOTdlMDZhNzZjY2RlZmMxMjEiLCJpZCI6IjVlYjEyZTE5N2UwNmE3NmNjZGVmYzEyMSIsImlhdCI6MTU4ODc1ODE1N30.xR9H0STbFOpSkuGA9jHNZOJ6eS7umHHqKRhI807YT1Y"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /api/v1/auth/refreshtoken:
     post:
       tags:
@@ -135,338 +101,783 @@ paths:
       summary: Use a refresh token to generate a new JWT token and a new refresh token
       description: The refresh token is sent and returned via cookies.
       operationId: refreshToken
-
-
-  /api/v1/auth/verify-email:
+      parameters:
+        - in: cookie
+          name: refreshToken
+          description: The `refreshToken` cookie
+          schema:
+            type: string
+            example: 51872eca5efedcf424db4cf5afd16a9d00ad25b743a034c9c221afc85d18dcd5e4ad6e3f08607550
+      responses:
+        "200":
+          description: Account details, a JWT access token and a new refresh token cookie
+          headers:
+            Set-Cookie:
+              description: "`refreshToken`"
+              schema:
+                type: string
+                example: refreshToken=51872eca5efedcf424db4cf5afd16a9d00ad25b743a034c9c221afc85d18dcd5e4ad6e3f08607550; Path=/; Expires=Tue, 16 Jun 2020 09:14:17 GMT; HttpOnly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  title:
+                    type: string
+                    example: "Mr"
+                  firstName:
+                    type: string
+                    example: "Jason"
+                  lastName:
+                    type: string
+                    example: "Watmore"
+                  email:
+                    type: string
+                    example: "jason@example.com"
+                  role:
+                    type: string
+                    example: "Admin"
+                  created:
+                    type: string
+                    example: "2020-05-05T09:12:57.848Z"
+                  isVerified:
+                    type: boolean
+                    example: true
+                  jwtToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWIxMmUxOTdlMDZhNzZjY2RlZmMxMjEiLCJpZCI6IjVlYjEyZTE5N2UwNmE3NmNjZGVmYzEyMSIsImlhdCI6MTU4ODc1ODE1N30.xR9H0STbFOpSkuGA9jHNZOJ6eS7umHHqKRhI807YT1Y"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /api/v1/auth/revokeToken:
+    post:
+      tags:
+        - auth
+      summary: Revoke a refresh token
+      description: Admin users can revoke the tokens of any account, regular users can only revoke their own tokens.
+      operationId: revokeToken
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: cookie
+          name: refreshToken
+          description: The refresh token can be sent in a cookie or the post body, if both are sent the token in the body is used.
+          schema:
+            type: string
+            example: 51872eca5efedcf424db4cf5afd16a9d00ad25b743a034c9c221afc85d18dcd5e4ad6e3f08607550
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: "51872eca5efedcf424db4cf5afd16a9d00ad25b743a034c9c221afc85d18dcd5e4ad6e3f08607550"
+      responses:
+        "200":
+          description: The refresh token was successfully revoked
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Token revoked"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /api/v1/auth/signup:
+    post:
+      tags:
+        - auth
+      summary: Register a new user account and send a verification email
+      description: The first account registered in the system is assigned the `Admin` role, other accounts are assigned the `User` role.
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: JohnWick
+                email:
+                  type: string
+                  example: john.wick@email.com
+                password:
+                  type: string
+                  description: unencrypted user's password
+                  example: r!1234aWe1Ro3$#
+                confirmPassword:
+                  type: string
+                  description: unencrypted user's password
+                  example: r!1234aWe1Ro3$#
+                role:
+                  type: array
+                    items: string
+                  example: ['user']
+              required:
+                - title
+                - username
+                - email
+                - password
+                - confirmPassword
+      responses:
+        "200":
+          description: The registration request was successful and a verification email has been sent to the specified email address
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: response object
+                    example: {}
+                  success:
+                    type: boolean
+                    description: return true if success otherwise false
+                    example: true
+                  error:
+                    type: boolean
+                    description: returns true if error otherwise false
+                    example: false
+                  message:
+                    type: string
+                    description: Successfull signup information
+                    example: "Registration successful, please check your email for verification instructions"
+                  status:
+                    type: number
+                    example: 200
+          "400":
+            $ref: "#/components/responses/BadRequestError"
+          "401":
+            $ref: "#/components/responses/UnauthorizedError"
+          "409":
+            $ref: "#/components/responses/ConflictError"
+          "422":
+            $ref: "#/components/responses/UnprocessedEntityError"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+  /api/v1/auth/verifyEmail:
     post:
       tags:
         - auth
       summary: Verify a new account with a verification token received by email after registration
-      description: Verifies email address
       operationId: verifyEmail
       requestBody:
-      required: true
-    content:
-      application/json:
-        schema:
-    
-
-  /api/v1/auth/reset-password:
-    post:
-      summary: Reset the password for an account
-      operationId: resetPassword
-      requestBody:
-      required: true
-    content:
-      application/json:
-        schema:
-  
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: "3c7f8d9c4cb348ff95a0b74a1452aa24fc9611bb76768bb9eafeeb826ddae2935f1880bc7713318f"
+              required:
+                - token
+      responses:
+        "200":
+          description: Verification was successful so you can now login to the account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Verification successful, you can now login"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "422":
+          $ref: "#/components/responses/UnprocessedEntityError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /accounts/forgot-password:
     post:
       tags:
         - auth
-      summary: Login a user
-      description: Logs in a use in the system
-      operationId: loginUser
-
-# #Returns a User
-#   /user:
-#     get:
-#       summary: Returns a list of users.
-#       description: People Who are already registered
-#       responses:
-#         200:    # status code
-#           description: Successul Response
-#           schema: 
-#             type: object
-#             properties:
-#               id:
-#                 type: integer
-#               name:
-#                 type: string
-
-# #Returns an array of Users
-#   /users:
-#     get:
-#       summary: Returns a list of users.
-#       description: People Who are already registered
-#       responses:
-#         200:    # status code
-#           description: Successul Response
-#           schema: 
-#             type: array
-#             items: 
-#               type: object
-#               properties:
-#                 id:
-#                   type: integer
-#                 name:
-#                   type: string
-
-
-# #Get Request with path id
-#   /users/{userId}:
-#     get:
-#       summary: Returns a user by ID.
-#       description: Returns the Specific User
-#       parameters:
-#         - name: userId
-#           in: path
-#           required: true
-#           schema:
-#             type : integer
-#             format: int64
-#       responses: 
-#         '200':
-#           description: OK
-#           schema:
-#             type: object
-#             example: {name: syed}
-
-# #Post json/body & Body required
-#   # /create:
-#   #   post:
-#   #     summary: Adds a new user
-#   #     produces:
-#   #       - application/json
-#   #     consumes:
-#   #       - application/json
-#   #     parameters:
-#   #       - in: body
-#   #         name: body
-#   #         schema:
-#   #           type: object
-#   #           required:
-#   #             - name
-#   #             - id
-#   #           properties:
-#   #             id:
-#   #               type: integer
-#   #             name:
-#   #               type: string
-#   #     responses:
-#   #       '200':
-#   #         description: OK
-
-
-# #Defining Body Reference
-#   /create:
-#     post:
-#       summary: Adds a new user
-#       produces:
-#         - application/json
-#       consumes:
-#         - application/json
-#       parameters:
-#         - in: body
-#           name: body
-#           schema:
-#            $ref: "#/components/schemas/User"
-#       responses:
-#         '200':
-#           description: OK
-
-
-# #Query
-# #Get Query
-#   /usersQuery:
-#     get:
-#       summary: Returns a user by ID.
-#       description: Returns the Specific User
-#       parameters:
-#         - in: query
-#           name: id
-#           type: integer
-#           enum: [1, 2]
-#           required: true
-#         # - in: query
-#         #   name: id
-#         #   type: integer
-#         #   enum: [1, 2]
-#         #   required: true
-#       responses: 
-#         '200':
-#           description: OK
-#           schema:
-#             type: object
-#             example: {name: syed,id: 21}
-
-
-
-# #File Upload Multiform Data
-#   /upload:
-#     post:
-#       tags:
-#         - Upload
-#       summary: Upload Video/Image for Inferring
-#       consumes:
-#         - multipart/form-data
-#       parameters:
-#         - in: formData
-#           name: file
-#           type: file
-#           required: true
-#           description: The file to upload.
-#         # - in: formData
-#         #   name: app
-#         #   type: string
-#         #   required: true
-#         #   description: Name of the model.
-#         # - in: formData
-#         #   name: id
-#         #   type: string
-#         #   required: true
-#         #   description: Some random Id.
-#       responses:
-#         200:
-#           description: Successful Response
-#         400:
-#           description: User Error
-#         500:
-#           description: Internal Server Error
-
-
-# #In Headers
-#   /string:
-#     get:
-#       summary: Checks if the server is alive
-#       parameters:
-#         - in: header
-#           name: X-Request-ID
-#           schema:
-#             type: string
-#             format: uuid
-#           required: true
-#       responses:
-#         200:
-#           description: Successful Response
-#         400:
-#           description: User Error
-#         500:
-#           description: Internal Server Error
-
-# #Cokies
-#   # /ping:
-#   #   get:
-#   #     summary: Checks if the server is alive
-#   #     parameters:
-#   #       - in: cookie
-#   #         name: debug
-#   #         schema:
-#   #           type: integer
-#   #           enum: [0, 1]
-#   #           default: 0
-#   #       - in: cookie
-#   #         name: csrftoken
-#   #         schema:
-#   #           type: string
-
+      summary: Submit email address to reset the password on an account
+      operationId: forgotPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "jason@example.com"
+              required:
+                - email
+      responses:
+        "200":
+          description: The request was received and an email has been sent to the specified address with password reset instructions (if the email address is associated with an account)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Please check your email for password reset instructions"
+  /api/v1/auth/validate-reset-token:
+    post:
+      tags:
+        - auth
+      summary: Validate the reset password token received by email after submitting to the /accounts/forgot-password route
+      operationId: validateResetToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: "3c7f8d9c4cb348ff95a0b74a1452aa24fc9611bb76768bb9eafeeb826ddae2935f1880bc7713318f"
+              required:
+                - token
+      responses:
+        "200":
+          description: Token is valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Token is valid"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+  /api/v1/auth/reset-password:
+    post:
+      tags:
+        - auth
+      summary: Reset the password for an account
+      operationId: resetPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: "3c7f8d9c4cb348ff95a0b74a1452aa24fc9611bb76768bb9eafeeb826ddae2935f1880bc7713318f"
+                password:
+                  type: string
+                  example: "newPass123"
+                confirmPassword:
+                  type: string
+                  example: "newPass123"
+              required:
+                - token
+                - password
+                - confirmPassword
+      responses:
+        "200":
+          description: Password reset was successful so you can now login to the account with the new password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Password reset successful, you can now login"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+  /api/v1/admin/users:
+    get:
+      tags:
+        - admin
+      summary: Get a list of all accounts
+      description: Restricted to admin users.
+      operationId: getAllAccounts
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An array of all accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "5eb12e197e06a76ccdefc121"
+                    username:
+                      type: string
+                      example: "Jason"
+                    email:
+                      type: string
+                      example: "jason@example.com"
+                    role:
+                      type: string
+                      example: ["Admin"]
+                    created:
+                      type: string
+                      example: "2020-05-05T09:12:57.848Z"
+                    updated:
+                      type: string
+                      example: "2020-05-08T03:11:21.553Z"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+    post:
+      tags:
+        - admin
+      summary: Create a new account
+      description: Restricted to admin users.
+      operationId: createAccount
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "Jason"
+                email:
+                  type: string
+                  example: "jason@example.com"
+                password:
+                  type: string
+                  example: "pass123"
+                confirmPassword:
+                  type: string
+                  example: "pass123"
+                role:
+                  type: string
+                  enum: [Admin, User]
+              required:
+                - title
+                - firstName
+                - lastName
+                - email
+                - password
+                - confirmPassword
+                - role
+      responses:
+        "200":
+          description: Account created successfully, verification is not required for accounts created with this endpoint. The details of the new account are returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  username:
+                    type: string
+                    example: "Jason"
+                  email:
+                    type: string
+                    example: "jason@example.com"
+                  role:
+                    type: string
+                    example: "Admin"
+                  created:
+                    type: string
+                    example: "2020-05-05T09:12:57.848Z"
+        "400":
+          description: Email is already registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Email 'jason@example.com' is already registered"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /api/v1/admin/users/{userId}:
+    parameters:
+      - in: path
+        name: id
+        description: Account id
+        required: true
+        example: "5eb12e197e06a76ccdefc121"
+        schema:
+          type: string
+    get:
+      tags:
+        - admin
+      summary: Get a single account by id
+      description: Admin users can access any account, regular users are restricted to their own account.
+      operationId: getAccountById
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Details of the specified account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  username:
+                    type: string
+                    example: "Jason"
+                  email:
+                    type: string
+                    example: "jason@example.com"
+                  role:
+                    type: string
+                    example: "Admin"
+                  created:
+                    type: string
+                    example: "2020-05-05T09:12:57.848Z"
+                  updated:
+                    type: string
+                    example: "2020-05-08T03:11:21.553Z"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+    put:
+      tags:
+        - admin
+      summary: Update an account
+      description: Admin users can update any account including role, regular users are restricted to their own account and cannot update role.
+      operationId: updateAccount
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "Jason"
+                email:
+                  type: string
+                  example: "jason@example.com"
+                password:
+                  type: string
+                  example: "pass123"
+                confirmPassword:
+                  type: string
+                  example: "pass123"
+                role:
+                  type: string
+                  enum: [Admin, User]
+      responses:
+        "200":
+          description: Account updated successfully. The details of the updated account are returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "5eb12e197e06a76ccdefc121"
+                  title:
+                    type: string
+                    example: "Mr"
+                  firstName:
+                    type: string
+                    example: "Jason"
+                  lastName:
+                    type: string
+                    example: "Watmore"
+                  email:
+                    type: string
+                    example: "jason@example.com"
+                  role:
+                    type: string
+                    example: "Admin"
+                  created:
+                    type: string
+                    example: "2020-05-05T09:12:57.848Z"
+                  updated:
+                    type: string
+                    example: "2020-05-08T03:11:21.553Z"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+    delete:
+      tags:
+        - admin
+      summary: Delete an account
+      description: Admin users can delete any account, regular users are restricted to their own account.
+      operationId: deleteAccount
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Account deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: response object
+                    example: {}
+                  success:
+                    type: boolean
+                    description: return true if success otherwise false
+                    example: true
+                  error:
+                    type: boolean
+                    description: returns true if error otherwise false
+                    example: false
+                  message:
+                    type: string
+                    description: Success message
+                    example: "Account deleted successfully"
+                  status:
+                    type: number
+                    example: 200
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
 components:
-  requestBodies:
-    UserArray:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    BadRequestError:
+      description: Bad request, either the refresh token is invalid, revoked, expired or you entered an invalid value.
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
-      description: List of user object
-      required: true
-  schemas:
-    User:
-      title: a User
-      description: A User who is subscribing to the writing services
-      type: object
-      required:
-        - username
-        - email
-        - password
-        - confirmPassword
-      properties:
-        username:
-          type: string
-          example: JohnWick
-        email:
-          type: string
-          example: john.wick@email.com
-        password:
-          type: string
-          description: unencrypted user's password
-          example: r!1234aWe1Ro3$#
-        confirmPassword:
-          type: string
-          description: unencrypted user's password
-          example: r!1234aWe1Ro3$#
-        role:
-          type: array
-            items: string
-          example: ['user']
-      xml:
-        name: User
-    Order:
-      title: Pet Order
-      description: An order for a pets from the pet store
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        petId:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int32
-        shipDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          description: Order Status
-          enum:
-            - placed
-            - approved
-            - delivered
-        complete:
-          type: boolean
-          default: false
-      xml:
-        name: Order
-    Response:            # Can be referenced as '#/components/schemas/Response'
-      type: object
-      properties:
-        data:
-          type: object
-          description: response object
-        success:
-          type: boolean
-          description: return true if success otherwise false
-        error:
-          type: boolean
-          description: returns true if error otherwise false
-        message:
-          type: string
-          description: information
-        status:
-          type: number
-    Error:            # Can be referenced as '#/components/schemas/Error'
-      title: An Error Response
-      description: An error for invalid requests
-      type: object
-      properties:
-        data:
-          type: object
-          description: response object
-        success:
-          type: boolean
-          description: return true if success otherwise false
-        error:
-          type: boolean
-          description: returns true if error otherwise false
-        message:
-          type: string
-          description: information
-        status:
-          type: number
-        stack:
-          type: string
+            type: object
+            properties:
+              data:
+                type: object
+                description: response object
+                example: {}
+              success:
+                type: boolean
+                description: return true if success otherwise false
+                example: false
+              error:
+                type: boolean
+                description: returns true if error otherwise false
+                example: true
+              message:
+                type: string
+                description: Bad Request error
+                example: "Bad/invalid Request Error"
+              status:
+                type: number
+                example: 400
+              stack:
+                type: string
+                example: "BadRequestError"
+    UnauthorizedError:
+      description: Access token is missing or invalid, or the user does not have access to perform the action
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: response object
+                example: {}
+              success:
+                type: boolean
+                description: return true if success otherwise false
+                example: false
+              error:
+                type: boolean
+                description: returns true if error otherwise false
+                example: true
+              message:
+                type: string
+                description: unauthorized error
+                example: "Unauthorized"
+              status:
+                type: number
+                example: 401
+              stack:
+                type: string
+                example: "UnauthorizedError"
+    ForbiddenError:
+      description: Forbidden error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: response object
+                example: {}
+              success:
+                type: boolean
+                description: return true if success otherwise false
+                example: false
+              error:
+                type: boolean
+                description: returns true if error otherwise false
+                example: true
+              message:
+                type: string
+                description: Bad Request error
+                example: "Bad Request Error"
+              status:
+                type: number
+                example: 403
+              stack:
+                type: string
+                example: "ForbiddenError"
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: response object
+                example: {}
+              success:
+                type: boolean
+                description: return true if success otherwise false
+                example: false
+              error:
+                type: boolean
+                description: returns true if error otherwise false
+                example: true
+              message:
+                type: string
+                description: Not found error
+                example: "Not Found Error"
+              status:
+                type: number
+                example: 404
+              stack:
+                type: string
+                example: "NotFoundError"
+    ConflictError:
+      description: Conflict error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: response object
+                example: {}
+              success:
+                type: boolean
+                description: return true if success otherwise false
+                example: false
+              error:
+                type: boolean
+                description: returns true if error otherwise false
+                example: true
+              message:
+                type: string
+                description: Conflict error
+                example: "Conflict Error"
+              status:
+                type: number
+                example: 409
+              stack:
+                type: string
+                example: "ConflictError"
+    UnprocessableEntityError:
+      description: UnprocessableEntity
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: response object
+                example: {}
+              success:
+                type: boolean
+                description: return true if success otherwise false
+                example: false
+              error:
+                type: boolean
+                description: returns true if error otherwise false
+                example: true
+              message:
+                type: string
+                description: Bad Request error
+                example: "Bad Request Error"
+              status:
+                type: number
+                example: 422
+              stack:
+                type: string
+                example: "BadRequestError"
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: response object
+                example: {}
+              success:
+                type: boolean
+                description: return true if success otherwise false
+                example: false
+              error:
+                type: boolean
+                description: returns true if error otherwise false
+                example: true
+              message:
+                type: string
+                description: Internal Server Error
+                example: "Internal Server Error"
+              status:
+                type: number
+                example: 500
+              stack:
+                type: string
+                example: "InternalServerError"
