@@ -56,9 +56,9 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 
-
-api1.yaml
-api2.yaml
+# Ignore template yaml files
+.api1.yaml
+.api2.yaml
 
 # Directories potentially created on remote AFP share
 .AppleDB
