@@ -77,7 +77,7 @@ exports.signup = async (req, res, next) => {
             }
 
             res.status(201)
-              .json(Response({}, false, true, "User was registered successfully!", 201));
+              .json(Response({}, false, true, "Registration successful, please check your email for verification instructions", 201));
           });
         });
       }

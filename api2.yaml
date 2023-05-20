@@ -397,7 +397,7 @@ components:
           type: string
           description: unencrypted user's password
           example: r!1234aWe1Ro3$#
-        role:
+        roles:
           type: array
             items: string
           example: ['user']
